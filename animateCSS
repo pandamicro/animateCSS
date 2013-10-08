@@ -6,7 +6,11 @@ $.fn.animateCSS = function( anime ) {
     var props = {
         'transition-property': 'all', 
         '-webkit-transition-property': 'all'
-    }, delay = 0, duration = 0, repeat = 1;
+    }, delay = 0, duration = 0, repeat = 1, queue = "fx";
+    
+    if (anime.queue) {
+        queue = anime.queue;
+    }
 
 	if (anime.duration) {
 	    $.extend(props, {
@@ -47,7 +51,7 @@ $.fn.animateCSS = function( anime ) {
 	    next();
 	}
 	
-	$(this).queue(doAnimation).delay(delay + duration * repeat);
+	$(this).queue(queue, doAnimation).delay(delay + duration * repeat, queue);
     
     return this;
 	
